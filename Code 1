@@ -1,0 +1,52 @@
+// lowercase - Used for all reserved words
+// camelCase - Used to Create a name for something (used for almost everything)
+// PascalCase - Classes are written in Pascal
+// UPPER_CASE - 
+// Variable - store one piece of data; declare things we want to use
+// int = number ex. 42
+// double = number with a fraction ex. 42.39
+// String = words ex. Names
+// Relational operators; < <= == >= > !=
+// and = &&
+// 0r = ||
+// not = !
+// increment = ++
+// decrement = --
+/*  public static void main(String[] args) {
+        // 
+        int age;
+        double cost;
+        String name;
+        age = 42;
+        age = 42+2;
+        age = age+1;
+        cost = 4.92;
+        name = "Peagan";
+        boolean isAlive = true; 
+        boolean costAlot = false;
+        
+        
+        cost = age;
+        // age = cost; there is an error because age cannot eaqual cost because age is a integer and cost is a double. meaning age does not have a space for fractions
+        
+        age = 1+2+3+4;
+        age = 1+2+3-4;
+        age = 2*5*4;
+        cost = 9/2; // final answer will be 4 because not in correct syntax
+        cost = 9.0/2; //need to make 9 a double to get a double result; 4.5
+        isAlive = 5>2;*/
+package ceasar;
+
+public class Ceasar {
+
+    public static void main(String[] args) {
+        int age = 29;
+        String name = "Peagan" + " Mitchell";
+        System.out.println(name + " is " + age + " years old.");
+
+    }
+
+}
+
+
+
