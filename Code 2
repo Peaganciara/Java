@@ -1,0 +1,21 @@
+/*Te purpose of this code is to demonstarte the difference between using int and
+double. If int is used in the place of double then the final answer for average 
+is a whole number. The whole number is NOT rounded to the nearest tenths place.
+Average using int = 7
+Average using double = 7.666666666
+*/
+package practicecodes;
+
+public class PracticeCodes {
+
+    public static void main(String[] args) {
+        double A, B, C;
+        double average;
+        A = 2.0;
+        B = 4.0;
+        C = 17.0;
+        average = ( A + B + C ) / 3;
+        System.out.println ( "The average of variables A, B, and C is " + average);
+    }
+
+}
