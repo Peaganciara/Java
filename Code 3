@@ -1,0 +1,78 @@
+/*
+While loop -->    public static void main(String[] args) {
+                    int count = 5;
+                    while (count != 0) {
+                     System.out.println(count);
+                     count++;
+
+For loop -->      public static void main(String[] args) {
+                    for (int count = 0; count < 1000000; count++) {
+                    System.out.println(count);
+
+Break -->         public static void main(String[] args) {
+                    for (int count = 0; count < 1000000; count++) {
+                    System.out.println(count);
+                    if (count == 27) {
+                    break;--> Used to terminate early
+I/O -->     Input/Output locations
+            stdout --> out, displays in output window
+            stderr --> err, displays in red
+            in --> allows you to put input into the output window.
+                Ex.1     public static void main(String[] args) {
+                         Scanner in = new Scanner(System.in);
+                         double cost;
+                         for (int count = 0; count < 3; count++) {
+                             cost = in.nextDouble();
+                             System.out.println( "The cost of your purchase
+                                                was " + "$" + cost);
+
+                Ex.2     public static void main(String[] args) {
+                         Scanner in = new Scanner(System.in);
+                         String str;
+                         for (int count = 0; count < 3; count++) {
+                         str = in.nextLine();
+                         System.out.println( "Peagan's favorite animal is a " 
+                                            + str + "!");      
+
+                Ex.3     public static void main(String[] args) {
+                            double A, B, C;
+                            double average;
+                            Scanner in = new Scanner(System.in);
+                            A = in.nextDouble();
+                            B = in.nextDouble();
+                            C = in.nextDouble();
+                            average = ( A + B + C ) / 3;
+                            System.out.println("The average of " + A + ", " + B + " and " + C + " is "
+                                                 + average + ".");
+ */
+package count1;
+
+import java.util.Scanner;
+
+public class Count1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       System.out.println( "Calculate the average of several values but end with"
+               + " a number less than 0. The negative value is not included in "
+               + "the result.");
+       int count;
+       double sum, average, value;
+       Scanner in = new Scanner(System.in);
+       sum = 0; count = 0;
+       
+       while (true) {
+           System.out.print( "next value: ");
+           value = in.nextDouble();
+           if ( value < 0 )
+               break;
+           count++;
+           sum = sum + value;
+       }
+       average = sum / count;
+       System.out.println("The average of " + count + " values is " + average);
+       }
+    }
+
