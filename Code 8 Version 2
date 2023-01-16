@@ -1,0 +1,104 @@
+package tiny1;
+
+import java.util.Scanner;
+
+public class Tiny1 {
+
+    private static Client mm;
+    private static Scanner in = new Scanner(System.in);
+
+    public static void createClient() {
+        mm = new Client(11, "Mary Murphy", 1234, 100.0);
+    }
+
+    public static int menu() {
+        String mnu = "\nBank of Capella\n"
+                + "1 - display\n"
+                + "2 - deposit\n"
+                + "3 - withdraw\n"
+                + "4 - quit\n";
+        System.out.println(mnu);
+
+        /*int num = 0;
+        while (num <= 0 || num > 4) {
+            System.out.print("Your Selection: ");
+            num = in.nextInt();
+        }*/
+        int num = getInt("Your Selection: ");
+        return num;
+    }//end menu()
+
+    //getInt() returns an integer for menu command
+    public static int getInt(String msg) {
+        int cmd = -1;
+        while (cmd < 1 || cmd > 4) {
+            System.out.print(msg);
+            try {
+                cmd = in.nextInt();
+                if (cmd < 1 || cmd > 4) {
+                    System.err.println("Valid commands are in the range 1-4. ");
+                }
+            } catch (Exception ex) {
+                in.nextLine();
+                System.err.println("Invalid Enrty");
+            }
+        }
+        return cmd;
+    }
+
+    //getDouble() returns a double dollar value
+    public static double getDouble(String msg) {
+        double amt = -1;
+        while (amt < 0) {
+            System.out.print(msg);
+            try {
+                amt = in.nextDouble();
+            } catch (Exception ex) {
+                in.nextLine();
+                System.err.println("Invalid Enrty");
+            }
+        }
+        return amt;
+    }
+// The Bank repeatedly get and execute user commands
+
+    public static void bank() {
+        double amt;
+        createClient();
+        int cmd = 0;
+        while (cmd != 4) {
+            cmd = menu();
+            switch (cmd) {
+                case 1://Display Function
+                    //System.out.println("display");
+                    mm.display();
+                    break;
+                case 2://Deposit Function
+                    //System.out.println("deposit");
+                    amt = getDouble("How much would you like to deposit? ");
+                    mm.deposit(amt);
+                    if (mm.getBalance() < 0) {
+                        System.err.println("Overdrawn by "
+                                + (-mm.getBalance()) + "\n");
+                    }
+                    break;
+                case 3://Withdraw Function
+                    //System.out.println("withdraw");
+                    amt = getDouble("How much would you like to withdraw? ");
+                    mm.withdraw(amt);
+                    if (mm.getBalance() < 0) {
+                        System.err.println("Overdrawn by "
+                                + (-mm.getBalance()) + "\n");
+                    }
+                    break;
+                case 4: // quit
+            } //end switch
+        } // end while
+    }    // end bank
+
+    public static void main(String[] args) {
+        System.out.println("\nThe Bank is open.");
+        bank();
+        System.out.println("\nThe Bank is closed.\n");
+    }
+}
