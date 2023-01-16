@@ -1,0 +1,153 @@
+package tiny1;
+
+import java.util.Scanner;
+
+public class Tiny1 {
+
+    private static Client mm;
+    private static Scanner in = new Scanner(System.in);
+
+    public static void createClient() {
+        mm = new Client(11, "Mary Murphy", 1234, 100.0);
+    }
+
+    public static int menu() {
+        String mnu = "\nBank of Capella\n"
+                + "1 - display\n"
+                + "2 - deposit\n"
+                + "3 - withdraw\n"
+                + "4 - quit\n";
+        System.out.println(mnu);
+
+        int num = 0;
+        while (num <= 0 || num > 4) {
+            System.out.print("Your Selection: ");
+            num = in.nextInt();
+        }
+        return num;
+    }//end menu()
+
+    public static void bank() {
+        double amt;
+        createClient();
+        int cmd = 0;
+        while (cmd != 4) {
+            cmd = menu();
+            switch (cmd) {
+                case 1://Display Function
+                    //System.out.println("display");
+                    mm.display();
+                    break;
+                case 2://Deposit Function
+                    //System.out.println("deposit");
+                    System.out.print("How much would you like to deposit? ");
+                    amt = in.nextDouble();
+                    mm.deposit(amt);
+                    if (mm.getBalance() < 0) {
+                        System.err.println("Overdrawn by "
+                                + (-mm.getBalance()) + "\n");
+                    }
+                    break;
+                case 3://Withdraw Function
+                    //System.out.println("withdraw");
+                    System.out.print("How much would you like to withdraw? ");
+                    amt = in.nextDouble();
+                    mm.withdraw(amt);
+                    if (mm.getBalance() < 0) {
+                        System.err.println("Overdrawn by "
+                                + (-mm.getBalance()) + "\n");
+                    }
+                    break;
+                case 4: // quit
+            } //end switch
+        } // end while
+    }    // end bank
+
+    public static void main(String[] args) {
+        System.out.println("\nThe Bank is open.");
+        bank();
+        System.out.println("\nThe Bank is closed.\n");
+    }
+}
+//
+*******************************************************
+Client
+*******************************************************
+//
+package tiny1;
+
+public class Client {
+
+    private int id;
+    private String name;
+    private int pin;
+    private double balance;
+
+    public Client() {
+    }
+
+    public Client(int id, String name, int pin, double balance) {
+        this.id = id;
+        this.name = name;
+        this.pin = pin;
+        this.balance = balance;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" + "id=" + id + ", name=" + name + ", pin=" + pin + ", "
+                + "balance=" + balance + '}';
+    } // end toString()
+
+    public void display() {
+        System.out.println();
+        System.out.println("ID:     " + id);
+        System.out.println("Name:   " + name);
+        System.out.println("Pin:    " + pin);
+        System.out.println("Balane: " + balance);
+        System.out.println();
+    } // end display()
+
+    public void deposit(double amt) {
+        balance += amt;
+
+    }
+
+    public void withdraw(double amt) {
+        balance -= amt; 
+    }
+       
+    }
+    
