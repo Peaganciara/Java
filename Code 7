@@ -1,0 +1,13 @@
+/*
+    public static void main(String[] args) {
+        System.out.println("This is Tiny1");
+        String str = "ABCDE";
+        char ch = str.charAt(0);
+        System.out.println("ch is " + ch);
+        ch = (char) (ch + 3);
+        System.out.println("ch is " + ch);
+
+        double cost = 14.49999;
+        cost = Math.round(cost);
+        int num = (int) cost;
+        System.out.println("num = " + num + " cost = " + cost + ".");
