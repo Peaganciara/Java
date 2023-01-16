@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Tiny1 {
 
     private static Client mm;
-    private static Scanner in = new Scanner(System.in);
+    private static Scanner in;
 
     public static void createClient() {
         mm = new Client(11, "Mary Murphy", 1234, 100.0);
@@ -63,6 +63,7 @@ public class Tiny1 {
 // The Bank repeatedly get and execute user commands
 
     public static void bank() {
+        in = new Scanner(System.in);
         double amt;
         createClient();
         int cmd = 0;
@@ -94,6 +95,7 @@ public class Tiny1 {
                 case 4: // quit
             } //end switch
         } // end while
+        in.close();
     }    // end bank
 
     public static void main(String[] args) {
