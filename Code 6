@@ -1,0 +1,56 @@
+/*
+********************************************************
+Palindrome.java - determines if a string is a palindrome
+Author: Peagan Mitchell 
+Date: 1/15/2023
+********************************************************
+*/
+package tiny;
+
+
+import java.util.Scanner;
+
+public class Tiny {
+    //Return true if str is a palindrome; returns false otherwise.
+    public static boolean isPalindrome(String str)  {
+        boolean isPal = true;
+        str = str.replaceAll(" ", "");
+        str = str.toLowerCase();
+        int lth = str.length();
+        int left = 0;
+        int right = lth - 1;
+        while (left < right)    {
+            if (str.charAt(left) != str.charAt(right))  {
+                isPal = false;
+                break;
+            }
+            left++;
+            right--;
+        }//Scans left to right and right to left to identify matching characters.
+        return isPal;
+    }//end isPalindrome()
+    public static void main(String[] args)  {
+        System.out.println("\nPalindromic Strings");
+        Scanner in = new Scanner(System.in);
+        
+        //Allows repeat test of palindromes.
+        //Stops when '.' is entered.
+        while (true)    {
+        System.out.print("\nPlease enter a line: ");
+        String str = in.nextLine();
+        str = str.trim();
+        if (str.equals("."))
+            break;
+        boolean isPal = isPalindrome(str);
+        System.out.println();
+        if (isPal)
+            System.out.println("'" + str + "' is a palindrome.");
+        else
+            System.out.println("'" + str + "' is not a palindrome.");
+        }
+        System.out.println("\nEnd of Palindrome\n");
+    
+    
+    }//end main()
+}//end class Palindrome
+
