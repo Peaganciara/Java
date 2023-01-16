@@ -1,0 +1,23 @@
+package exceptions;
+
+public class Exceptions {
+
+    public static void main(String[] args) {
+        System.out.println("Extract an int from a string.\n");
+        String data = "   42   ";
+        int n = -1;
+        data = data.trim();
+        try {
+            n = Integer.parseInt(data);
+            if (n == 42)    {
+                throw new Exception("Bad N =(");
+            }
+        } catch (Exception ex) {
+               System.err.println(ex.getMessage());
+        } finally   {
+            n = 222;
+        }
+        System.out.println("n = " + n + "\n");
+    }
+
+}
