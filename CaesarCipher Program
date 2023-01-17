@@ -1,0 +1,83 @@
+Assignment Instructions
+Complete the following steps to build a program that implements the Caesar Cipher algorithm.
+
+Build a translate method—public static String translate(String inText, int key)—that accepts the provided text and Key.
+Translate must be a method with the header/signature shown above.
+Build a driver method.
+Take sufficient screen shots to demonstrate that your program meets all requirements.
+Include the execution output of your program to convince a reader that it functions properly—both encoding and decoding messages.
+Test your program with both positive and negative Key values and text strings containing both alphabetic and nonalphabetic characters.
+Paste these screen shots into an MS Word document.
+For your final test, you use must use the following input: “–3 Zh, wkh 42 shrsoh, ri wkh . . .”
+Create a .zip file containing your NetBeans Caesar Cipher project.
+Before zipping your project, right-click the project and "clean" it. This greatly reduces the file size and speeds up the program's performance.
+Then close NetBeans.
+Add the MS Word document with your screenshots to your .zip file.
+Submit your cleaned Caesar Cipher project in an appropriately constructed and correctly named .zip file.
+Name your .zip file following this pattern: LastName_Week1.zip.
+
+
+
+
+package ceasarcipher;
+
+import java.util.Scanner;
+
+
+public class CeasarCipher {
+
+    
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String str1;
+        //String str2 = "";
+        
+        int letter;
+        int shift;
+        int codeLetter;
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        
+        //prompt for message to encode
+        System.out.print("Enter your secret message: ");
+        str1 = in.nextLine();
+        shift = 3;
+        
+        for (int i = 0; i < str1.length(); i++ ){
+            char ch = str1.charAt(i);
+            System.out.print(ch);
+            char ch2 = (char) (ch + 1);
+            System.out.print("  " + ch2);
+            boolean isLetter = Character.isLetter(ch);
+            System.out.print("  " + isLetter);
+            System.out.println();
+            }
+        
+        
+        //System.out.println(str2);
+        in.close();
+        
+        /*for (int i = 0; i < str1.length(); i++ )    {
+            char ch = str1.charAt(i);
+            System.out.print(ch);
+            char ch2 = (char) (ch + 1);
+            System.out.print("  " + ch2);
+            boolean isLetter = Character.isLetter(ch);
+            System.out.print("  " + isLetter);
+            System.out.println();
+        }
+                }
+    
+    
+    
+    
+    public static String tarnslate(String inText, int key)  {
+        System.out.println("Use the Ceasar Cipher to encrypt and decode secret messages. ");
+        Scanner in = new Scanner(System.in);
+        String str;
+        for (int count = 0; count < 3; count++) {
+           str = in.nextLine(); 
+           System.out.println(str);
+    }
+        return null;*/
+    }
+}
