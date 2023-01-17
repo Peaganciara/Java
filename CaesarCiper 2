@@ -1,0 +1,87 @@
+/*
+I
+P
+O
+*/
+
+
+
+package ceasarcipher;
+
+import java.util.Scanner;
+
+public class CeasarCipher {
+
+    public static void main(String[] args) {
+        System.out.println("Caesar Cipher: Use this program to encode and "
+                + "decode your top secret spy messages!\n");
+
+        String str;
+        Scanner in = new Scanner(System.in);
+        while (true) {
+            System.out.print("Your Code Here: \n");
+            str = in.nextLine();
+            str = str.trim(); // might not need this step
+            if (str.equals("*")) {
+                break;
+            }
+            System.out.println();
+        }
+    }
+
+    public static String tarnslate(String inText, int key) {
+        Scanner in = new Scanner(System.in);
+        String str1;
+        //String str2 = "";
+
+        int letter;
+        int shift;
+        int codeLetter;
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+        //prompt for message to encode
+        System.out.print("Enter your secret message: ");
+        str1 = in.nextLine();
+        shift = 3;
+
+        for (int i = 0; i < str1.length(); i++) {
+            char ch = str1.charAt(i);
+            System.out.print(ch);
+            char ch2 = (char) (ch + 1);
+            System.out.print("  " + ch2);
+            boolean isLetter = Character.isLetter(ch);
+            System.out.print("  " + isLetter);
+            System.out.println();
+        }
+
+        //System.out.println(str2);
+        in.close();
+
+        /*for (int i = 0; i < str1.length(); i++ )    {
+            char ch = str1.charAt(i);
+            System.out.print(ch);
+            char ch2 = (char) (ch + 1);
+            System.out.print("  " + ch2);
+            boolean isLetter = Character.isLetter(ch);
+            System.out.print("  " + isLetter);
+            System.out.println();
+        }
+                }
+    
+    
+    
+    
+    public static String tarnslate(String inText, int key)  {
+        System.out.println("Use the Ceasar Cipher to encrypt and decode secret messages. ");
+        Scanner in = new Scanner(System.in);
+        String str;
+        for (int count = 0; count < 3; count++) {
+           str = in.nextLine(); 
+           System.out.println(str);
+    }
+        return null;*/
+        return null;
+
+    }
+
+}
