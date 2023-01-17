@@ -17,15 +17,6 @@ public class CeasarCipher {
 */
 
 
-
-/*
-I
-P
-O
-*/
-
-
-
 package ceasarcipher;
 
 import java.util.Scanner;
