@@ -2,6 +2,26 @@
 I
 P
 O
+
+package ceasarcipher;
+
+import java.util.Scanner;
+
+public class CeasarCipher {
+
+    public static void main(String[] args) {
+        System.out.println("Caesar Cipher: Use this program to encode and "
+                + "decode your top secret spy messages!\n");
+        System.out.print("Input key <space> text: ");
+    }}
+*/
+
+
+
+/*
+I
+P
+O
 */
 
 
@@ -15,7 +35,7 @@ public class CeasarCipher {
     public static void main(String[] args) {
         System.out.println("Caesar Cipher: Use this program to encode and "
                 + "decode your top secret spy messages!\n");
-
+        translate();
         String str;
         Scanner in = new Scanner(System.in);
         while (true) {
@@ -29,7 +49,7 @@ public class CeasarCipher {
         }
     }
 
-    public static String tarnslate(String inText, int key) {
+    public static String translate() {
         Scanner in = new Scanner(System.in);
         String str1;
         //String str2 = "";
