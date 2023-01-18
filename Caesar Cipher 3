@@ -1,0 +1,79 @@
+/*
+---Things to do---
+1. add loop
+2. add range for key
+3. only allow integer in key
+ */
+package ceasarcipher;
+
+import java.util.Scanner;
+
+public class CeasarCipher {
+
+    /*
+    Input   - key, messsage
+    Process - Use caesar's algorithm to shift the message by the key
+    Output  - the translated message
+     */
+    
+    //This portion of the code translates message using caesar's cipher
+    public static String translate(String inText, int key) {
+        String outText = "";
+        for (int i = 0; i < inText.length(); i++) {
+            char ch = inText.charAt(i);
+            if (Character.isLetter(ch)) {
+                ch = (char) (ch + key);
+                outText = outText + ch;
+
+            } else {
+                outText = outText + ch;
+            }
+
+        }
+        return outText;
+
+    }
+
+    /*
+    Input   - key, messsage
+    Process - Call translate(key, message)
+    Output  - the translated message
+     */
+    
+    //This portion of the code outputs the translated message.
+    public static void main(String[] args) {
+        int key;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Caesar Cipher: Use this program to encode and "
+                + "decode your top secret spy messages!\n");
+        while (true) {
+            System.out.print("Enter your shift key and secret message here: (Shift "
+                    + "key <space> text)\n \nOriginal:   ");
+            try {
+                key = in.nextInt();
+            } catch (Exception ex) {
+                System.err.println("You seem a little suspicious, try again.");
+                continue;
+            }
+            if (key < -3 || key > 3) {
+                break;
+            }
+            String inText = in.nextLine();
+            String outText = translate(inText, key);
+            System.out.println("Translated:  " + outText);
+            System.err.println("\n\nNeed help?");
+            System.out.println("\nA legend is provided to help decipher characters "
+                    + "within the tranlated code.\n^_` a b c d e f g h i j k l m n "
+                    + "o p q r s t u v w x y z { | }\n\n"
+                    + "");
+
+        }//end while
+        System.err.println("\n Intruder Alert ! Translation has ended !!!");
+    }//end main
+
+}//end class
+
+
+/*
+^_` a b c d e f g h i j k l m n o p q r s t u v w x y z { | }
+ */
