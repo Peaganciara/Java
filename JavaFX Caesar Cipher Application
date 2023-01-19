@@ -1,0 +1,88 @@
+/*
+
+ */
+package caesarcipher;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author: Peagan Mitchell Date : 01/18/2023
+ */
+public class CaesarCipher extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+
+        Label CCT = new Label("CAESAR CIPHER TRANSLATION");
+        Label SK = new Label("Select a key, enter message, press 'Translate'");
+        TextField f1 = new TextField();
+
+        Button translate = new Button("Translate");
+        translate.setOnAction(e -> {
+            String theText1 = f1.getText();
+            System.out.println("Secret Message: " + theText1);
+            f1.clear();
+
+        });
+        Button copyup = new Button("Copy Up");
+        Button clear = new Button("Clear");
+        String theText1 = f1.getText();
+        System.out.println("Message 1: " + f1);
+        TextField f2 = new TextField();
+        String theText2 = f2.getText();
+        System.out.println("Message 2: " + f2);
+        Label str1 = new Label("Message 1: ");
+        Label str2 = new Label("Message 2: ");
+
+        HBox hbox = new HBox(25);
+        hbox.getChildren().addAll(translate, copyup, clear);
+
+        HBox hboxf1 = new HBox(10);
+        hboxf1.getChildren().addAll(str1, f1);
+        HBox hboxf2 = new HBox(10);
+        hboxf2.getChildren().addAll(str2, f2);
+
+        VBox vbox = new VBox(15);
+        vbox.getChildren().addAll(CCT, SK, hboxf1, hboxf2, hbox);
+        vbox.setMargin(hbox, new Insets(60, 0, 0, 120));
+
+        VBox vboxol = new VBox(vbox);
+        vboxol.setMargin(vbox, new Insets(20, 25, 0, 10));
+
+        Scene scene = new Scene(vboxol, 500, 275);
+
+        primaryStage.setTitle("Hello World!");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    /**
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+}
+/*
+Button translate = new Button("Translate");
+Button copyup = new Button("Copy Up");
+Button clear = new Button("Clear");
+VBox vbox = new VBox( 10, CCT, SK, translate, copyup, clear );
+HBox hbox = new HBox( 25, CCT, SK, translate, copyup, clear );
+Label SK = new Label( " Select a key, enter message, press 'Translate'")
+TextField 1 = new TextField();
+TextField 2 = new TextField();
+
+ */
