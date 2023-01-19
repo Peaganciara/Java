@@ -1,0 +1,183 @@
+
+package ccmenufx;
+
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+
+/**
+ *
+ * @author Peagan Mitchell
+ */
+public class CCMenuFX extends Application {
+    
+
+
+    private Scene welcomeScene, translatorScene;      // Scenes we will put on the Stage
+
+    @Override
+    public void start(Stage primaryStage) {
+        createWelcomeScene(primaryStage);
+        createTranslatorScene(primaryStage);
+
+        primaryStage.setScene(welcomeScene);     // Load the initial Scene
+        primaryStage.setTitle("Menu FX Example");
+        primaryStage.show();
+    } // end start()
+
+    //Menu Setup
+    public MenuBar addMenu(Stage primaryStage) {
+        Menu menu1 = new Menu("Agent Menu");
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(menu1);
+        MenuItem menu12 = new MenuItem("Welcome");
+        MenuItem menu11 = new MenuItem("Caesar Cipher");
+
+        Menu menu2 = new Menu("Files");
+        menuBar.getMenus().add(menu2);
+        MenuItem menu21 = new MenuItem("Confidential");
+        MenuItem menu22 = new MenuItem("Top Secret");
+        MenuItem menu23 = new MenuItem("Classified");
+
+        menu1.getItems().addAll(menu12, menu11);
+        menu2.getItems().addAll(menu21, menu22, menu23);
+
+        menu11.setOnAction(e -> primaryStage.setScene(translatorScene));
+        menu12.setOnAction(e -> primaryStage.setScene(welcomeScene));
+
+        return menuBar;
+    } // end addMenu()
+
+    public void createTranslatorScene(Stage primaryStage) {
+        /*
+        Label comboBoxLBL = new Label("COMBOBOX SCENE");
+        Label cbLBL = new Label("Make a selection:");
+        String[] kids = {"kitten", "puppy", "duckling", "calf"};
+        ObservableList<String> kidsOL = FXCollections.observableArrayList(kids);
+        ComboBox<String> kidsCB = new ComboBox<>(kidsOL);
+        */
+        
+        Label CCT = new Label("CAESAR CIPHER TRANSLATION");
+        Label SK = new Label("Select a key, enter message, press 'Translate'");
+        TextField f1 = new TextField();
+        f1.setPrefWidth(350);
+
+        Button translate = new Button("Translate");
+        translate.setOnAction(e -> {
+            String theText1 = f1.getText();
+            System.out.println("Secret Message: " + theText1);
+            f1.clear();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Alert!!!");
+            alert.setHeaderText("Header");
+            alert.setContentText("Error: " + theText1);
+            alert.showAndWait();
+        }
+        );
+        // Combo Box Starts Here
+        Label key = new Label("Key: ");
+        String[] value = {"-3", "-2", "-1", "0", "1", "2", "3"};
+        ObservableList<String> valueol = FXCollections.observableArrayList(value);
+        ComboBox<String> valueCB = new ComboBox(valueol);
+                translate.setOnAction(e -> {
+            String selected = valueCB.getValue();
+            if (selected == null) {
+                System.out.println("Nothing selected.");
+            } else {
+                System.out.println("Selected: " + selected);
+            }
+            valueCB.setValue(null);
+        });
+        // Combo box ends
+        
+        
+
+        Button getTextBTN = new Button("Get Combo selection");
+        TextField echoTF = new TextField();
+        echoTF.setEditable(false);
+        getTextBTN.setOnAction(e -> {
+            String selected = valueCB.getValue();
+            if (selected == null) {
+                // System.out.println("Nothing was selected");
+                echoTF.setText("Nothing was selected");
+            } else {
+                // System.out.println("selected = " + selected);
+                echoTF.setText("selected = " + selected);
+            }
+            valueCB.setValue(null);
+        });
+        
+                Button copyup = new Button("Copy Up");
+        Button clear = new Button("Clear");
+        String theText1 = f1.getText();
+        System.out.println("Message 1: " + f1);
+        TextField f2 = new TextField();
+        f2.setPrefWidth(350);
+        String theText2 = f2.getText();
+        System.out.println("Message 2: " + f2);
+        Label str1 = new Label("Message 1: ");
+        Label str2 = new Label("Message 2: ");
+        
+//Start HBox Section
+        HBox hboxt = new HBox(15);
+        hboxt.getChildren().addAll(key, valueCB);
+
+        HBox hbox = new HBox(25);
+        hbox.getChildren().addAll(translate, copyup, clear);
+
+        HBox hboxf1 = new HBox(10);
+        hboxf1.getChildren().addAll(str1, f1);
+        HBox hboxf2 = new HBox(10);
+        hboxf2.getChildren().addAll(str2, f2);
+        
+//Start VBox Section
+
+        VBox vbox = new VBox(15);
+        vbox.getChildren().addAll(CCT, SK, hboxt, hboxf1, hboxf2, hbox);
+        vbox.setMargin(hbox, new Insets(20, 0, 0, 120));
+
+        VBox vboxol = new VBox(vbox);
+        vboxol.setMargin(vbox, new Insets(20, 25, 0, 10));
+
+
+
+        VBox vboxOL = new VBox(addMenu(primaryStage), vbox);    
+
+        translatorScene = new Scene(vboxOL, 500, 350);      
+
+        
+    } // end createTranslatorScene()
+
+    public void createWelcomeScene(Stage primaryStage) {
+        Label titleLBL = new Label("Welcome");
+        Label topLBL = new Label("It's always nice to have new spies join the team!");
+        Label midLBL = new Label("Use the Caesar Cipher to encode and decode top secret messages.");
+        Label botLBL = new Label("But be warned, we'll know if you're double agent!");
+
+        VBox vbox = new VBox(20, titleLBL, topLBL, midLBL, botLBL);
+        VBox vboxOL = new VBox(addMenu(primaryStage), vbox);
+        VBox.setMargin(vbox, new Insets(75, 0, 0, 50));
+
+         welcomeScene = new Scene(vboxOL, 500, 350);
+    } // end createWelcomeScene()
+
+    public static void main(String[] args) {
+        launch(args);
+    } // end main()
+
+} // end class MenuFX1
