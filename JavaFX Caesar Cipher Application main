@@ -1,0 +1,286 @@
+/*
+1. find a way to clear the key value with a clear button
+2. make an alert pop up for when no key value is selected
+3. add the translation code and have out text be entered in f2
+4. Screenshots of functionality
+5. test program once translator included
+6. screen shot of test with alert message
+7. word document
+8. test final testing code
+9. clean and create zip file and save with proper title
+ */
+package ccmenufx;
+
+import java.util.Scanner;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author diana
+ */
+public class CCMenuFX extends Application {
+
+    // Employee ID of the currently logged-in employee
+    private int employeeId = 0;     // All valid IDs are > 0
+
+    // Application scenes
+    private Scene welcomeScene, translatorScene, tableviewScene, liScene;    // Scenes we will put on the Stage
+
+    @Override
+
+    public void start(Stage primaryStage) {
+        createWelcomeScene(primaryStage);
+        createTranslatorScene(primaryStage);
+        createTableViewScene(primaryStage);
+
+        primaryStage.setScene(welcomeScene);     // Load the initial Scene
+        primaryStage.setTitle("Menu FX Example");
+        primaryStage.show();
+    } // end start()
+
+    //Menu Setup
+    public MenuBar addMenu(Stage primaryStage) {
+        Menu menu1 = new Menu("Agent Menu");
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(menu1);
+        MenuItem menu12 = new MenuItem("Welcome");
+        MenuItem menu11 = new MenuItem("Caesar Cipher");
+
+        Menu menu2 = new Menu("Files");
+        menuBar.getMenus().add(menu2);
+        MenuItem menu21 = new MenuItem("Confidential");
+        MenuItem menu22 = new MenuItem("Top Secret");
+        MenuItem menu23 = new MenuItem("Classified");
+
+        Menu menu3 = new Menu("Database");
+        menuBar.getMenus().add(menu3);
+        MenuItem menu13 = new MenuItem("Agent Table");
+
+        menu1.getItems().addAll(menu12, menu11);
+        menu2.getItems().addAll(menu21, menu22, menu23);
+        menu3.getItems().addAll(menu13);
+
+        menu11.setOnAction(e -> primaryStage.setScene(translatorScene));
+        menu12.setOnAction(e -> primaryStage.setScene(welcomeScene));
+        menu13.setOnAction(e -> primaryStage.setScene(tableviewScene));
+
+        return menuBar;
+    } // end addMenu()
+
+    public void createTranslatorScene(Stage primaryStage) {
+        /*
+        Label comboBoxLBL = new Label("COMBOBOX SCENE");
+        Label cbLBL = new Label("Make a selection:");
+        String[] kids = {"kitten", "puppy", "duckling", "calf"};
+        ObservableList<String> kidsOL = FXCollections.observableArrayList(kids);
+        ComboBox<String> kidsCB = new ComboBox<>(kidsOL);
+         */
+        Label CCT = new Label("CAESAR CIPHER TRANSLATION");
+        Label SK = new Label("Select a key, enter message, press 'Translate'");
+        TextField f1 = new TextField();
+        f1.setPrefWidth(350);
+
+        Button clear = new Button("Clear");
+        System.out.println("Message 1: " + f1);
+        TextField f2 = new TextField();
+        f2.setEditable(false);
+        f2.setPrefWidth(350);
+
+        String theText2 = f2.getText();
+        System.out.println("Message 2: " + f2);
+        Label str1 = new Label("Message 1: ");
+        Label str2 = new Label("Message 2: ");
+        Button translate = new Button("Translate");
+        Button copyup = new Button("Copy Up");
+        copyup.setOnAction(e -> {
+            f1.setText(f2.getText());
+        });
+
+        // Combo Box Starts Here
+        Label key = new Label("Key: ");
+        String[] value = {"-3", "-2", "-1", "0", "1", "2", "3"};
+        ObservableList<String> valueol = FXCollections.observableArrayList(value);
+        ComboBox<String> valueCB = new ComboBox(valueol);
+
+        translate.setOnAction(e -> {
+            int keyvaluecb = 0;
+            String theText1 = f1.getText();
+            String selected = valueCB.getValue();
+            System.out.println("Secret Message: " + theText1);
+            f1.clear();
+            f1.requestFocus();
+
+            clear.setOnAction(k -> {
+                f1.clear();
+                f2.clear();
+                int number;
+                number = Integer.parseInt(selected);
+//Todo. add clear button for key                       
+
+            });
+
+            if (selected == null) {
+                System.out.println("Nothing selected.");
+                f2.setText("Shift key not selected.");
+                valueCB.requestFocus();
+                return;
+            } else {
+                System.out.println("Selected: " + selected);
+            }
+            valueCB.setValue(null);
+
+        });
+
+        // Combo box ends
+        Button getTextBTN = new Button("Get Combo selection");
+        TextField echoTF = new TextField();
+        echoTF.setEditable(false);
+        getTextBTN.setOnAction(e -> {
+            String selected = valueCB.getValue();
+            if (selected == null) {
+                // System.out.println("Nothing was selected");
+                echoTF.setText("Nothing was selected");
+            } else {
+                // System.out.println("selected = " + selected);
+                echoTF.setText("selected = " + selected);
+            }
+            valueCB.setValue(null);
+        });
+
+//Start HBox Section
+        HBox hboxt = new HBox(15);
+        hboxt.getChildren().addAll(key, valueCB);
+
+        HBox hbox = new HBox(25);
+        hbox.getChildren().addAll(translate, copyup, clear);
+
+        HBox hboxf1 = new HBox(10);
+        hboxf1.getChildren().addAll(str1, f1);
+        HBox hboxf2 = new HBox(10);
+        hboxf2.getChildren().addAll(str2, f2);
+
+//Start VBox Section
+        VBox vbox = new VBox(15);
+        vbox.getChildren().addAll(CCT, SK, hboxt, hboxf1, hboxf2, hbox);
+        vbox.setMargin(hbox, new Insets(20, 0, 0, 120));
+
+        VBox vboxol = new VBox(vbox);
+        vboxol.setMargin(vbox, new Insets(20, 25, 0, 10));
+
+        VBox vboxOL = new VBox(addMenu(primaryStage), vbox);
+
+        translatorScene = new Scene(vboxOL, 500, 350);
+
+    } // end createTranslatorScene()
+
+    public void createWelcomeScene(Stage primaryStage) {
+        Label titleLBL = new Label("Welcome");
+        Label topLBL = new Label("It's always nice to have new spies join the team!");
+        Label midLBL = new Label("Use the Caesar Cipher to encode and decode "
+                + "top secret messages.\n\nThe Cipher can be found in the agent menu.");
+        Label botLBL = new Label("But be warned, we'll know if you're double agent!");
+
+        VBox vbox = new VBox(20, titleLBL, topLBL, midLBL, botLBL);
+        VBox vboxOL = new VBox(addMenu(primaryStage), vbox);
+        VBox.setMargin(vbox, new Insets(75, 0, 0, 50));
+
+        welcomeScene = new Scene(vboxOL, 500, 350);
+    } // end createWelcomeScene()
+
+    public void createTableViewScene(Stage primaryStage) {
+
+        Label titleLBL = new Label("TABLEVIEW SCENE");
+        TableView tableView = new TableView();
+
+        TableColumn<Integer, Client> idCOL = new TableColumn<>("ID");
+        idCOL.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idCOL.setPrefWidth(50);
+        idCOL.setStyle("-fx-alignment: CENTER;");
+
+        TableColumn<String, Client> firstNameCOL = new TableColumn<>("First Name");
+        firstNameCOL.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        firstNameCOL.setPrefWidth(145);
+
+        TableColumn<String, Client> lastNameCOL = new TableColumn<>("Last Name");
+        lastNameCOL.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        lastNameCOL.setPrefWidth(145);
+
+        TableColumn<Double, Client> balanceCOL = new TableColumn<>("Salary");
+        balanceCOL.setCellValueFactory(new PropertyValueFactory<>("balance"));
+        balanceCOL.setPrefWidth(100);
+        balanceCOL.setStyle("-fx-alignment: CENTER-RIGHT;");
+
+        tableView.getColumns().add(idCOL);
+        tableView.getColumns().add(firstNameCOL);
+        tableView.getColumns().add(lastNameCOL);
+        tableView.getColumns().add(balanceCOL);
+
+        tableView.getItems().add(new Client(1, "Robert", "Hanssen", 1234552.56));
+        tableView.getItems().add(new Client(2, "Ann", "Bates", 2345151.89));
+        tableView.getItems().add(new Client(3, "Kim", "Philby", 742551.55));
+
+        VBox vbox = new VBox(20, titleLBL, tableView);
+        vbox.setMaxSize(460, 200);     // width, height
+
+        VBox vboxOL = new VBox(addMenu(primaryStage), vbox);
+        VBox.setMargin(vbox, new Insets(25));
+
+        tableviewScene = new Scene(vboxOL, 500, 350);
+    } // end createTableViewScene()
+
+    
+        //This portion of the code translates message using caesar's cipher
+    public static String translate(String inText, int key) {
+        String outText = "";
+        for (int i = 0; i < inText.length(); i++) {
+            char ch = inText.charAt(i);
+            if (Character.isLetter(ch)) {
+                ch = (char) (ch + key);
+                outText = outText + ch;
+
+            } else {
+                outText = outText + ch;
+            }
+
+        }
+        return outText;
+
+    }
+    
+    public static void Scanner(String[] args) {
+
+        int key;
+        Scanner in = new Scanner(System.in);
+        key = in.nextInt();
+        String inText = in.nextLine();
+        String outText = translate(inText, key);
+
+    } // end main()
+    
+        public static void Main(String[] args) {
+
+    
+
+        launch(args);
+    } // end main()
+
+} // end class MenuFX1
