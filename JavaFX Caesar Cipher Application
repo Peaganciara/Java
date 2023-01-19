@@ -1,9 +1,14 @@
 /*
 
  */
-package caesarcipher;
+package calculatorcc;
 
+/*
+ * @author: Peagan Mitchell 
+ * Date : 01/18/2023
+ */
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,69 +25,83 @@ import javafx.stage.Stage;
  *
  * @author: Peagan Mitchell Date : 01/18/2023
  */
-public class CaesarCipher extends Application {
+public class CalculatorCC extends Application {
+
+    private int result = 0;
 
     @Override
     public void start(Stage primaryStage) {
 
-        Label CCT = new Label("CAESAR CIPHER TRANSLATION");
-        Label SK = new Label("Select a key, enter message, press 'Translate'");
-        TextField f1 = new TextField();
+        Label titleLabel = new Label("\nADDING EXAMPLE");
+        Label numberLabel = new Label("Number:");
+        TextField numberTF = new TextField();
+        numberTF.setPrefWidth(80);
+        Label resultLabel = new Label("Result: ");
 
-        Button translate = new Button("Translate");
-        translate.setOnAction(e -> {
+        Button addBTN = new Button("   ADD   ");
+        addBTN.setOnAction(e -> {
+            String inputNumber = numberTF.getText();
+            System.out.println("Number = " + inputNumber);
+            int amt = getInt(inputNumber, resultLabel);
+            if (amt > 0)    {
+            System.out.println("Amount = " + amt);
+            result = result + amt;
+            resultLabel.setText("Result = " + result);
+            numberTF.clear();
+            }
+            numberTF.requestFocus();
+
+            /*
             String theText1 = f1.getText();
             System.out.println("Secret Message: " + theText1);
             f1.clear();
-
+             */
         });
-        Button copyup = new Button("Copy Up");
-        Button clear = new Button("Clear");
-        String theText1 = f1.getText();
-        System.out.println("Message 1: " + f1);
-        TextField f2 = new TextField();
-        String theText2 = f2.getText();
-        System.out.println("Message 2: " + f2);
-        Label str1 = new Label("Message 1: ");
-        Label str2 = new Label("Message 2: ");
+        Button clearBTN = new Button("   Clear   ");
+        clearBTN.setOnAction(e -> {
+            numberTF.clear();
+            resultLabel.setText("");
+            numberTF.requestFocus();
+        });
 
-        HBox hbox = new HBox(25);
-        hbox.getChildren().addAll(translate, copyup, clear);
+        HBox numberHbox = new HBox(25);
+        numberHbox.getChildren().addAll(numberLabel, numberTF);
 
-        HBox hboxf1 = new HBox(10);
-        hboxf1.getChildren().addAll(str1, f1);
-        HBox hboxf2 = new HBox(10);
-        hboxf2.getChildren().addAll(str2, f2);
+        HBox buttonHbox = new HBox(25);
+        buttonHbox.getChildren().addAll(addBTN, clearBTN);
 
-        VBox vbox = new VBox(15);
-        vbox.getChildren().addAll(CCT, SK, hboxf1, hboxf2, hbox);
-        vbox.setMargin(hbox, new Insets(60, 0, 0, 120));
+        VBox vbox = new VBox(20);
+        vbox.getChildren().addAll(titleLabel, numberHbox, buttonHbox, resultLabel);
+        /* vbox.setMargin(numberHbox, new Insets(5, 0, 0, 10));
+        vbox.setMargin(buttonHbox, new Insets(5, 0, 0, 80));
+        vbox.setMargin(titleLabel, new Insets(5, 0, 0, 100));
+        vbox.setMargin(resultLabel, new Insets(5, 0, 0, 80));
+         */
 
         VBox vboxol = new VBox(vbox);
-        vboxol.setMargin(vbox, new Insets(20, 25, 0, 10));
-
-        Scene scene = new Scene(vboxol, 500, 275);
+        vboxol.setMargin(vbox, new Insets(10, 0, 0, 40));
+        Scene scene = new Scene(vboxol, 230, 200);
 
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
+    } // end start()
 
-    /**
-     */
+
+             public static int getInt(String inputNumber, Label resultLabel) {
+        int amt = -1;
+        inputNumber = inputNumber.trim();
+        try {
+            amt = Integer.parseInt(inputNumber);
+            if (amt <= 0)
+                throw new NumberFormatException();
+        } catch (Exception ex) {
+            resultLabel.setText("Enter an Integer > 0.");
+        }
+        return amt;}
+        
     public static void main(String[] args) {
         launch(args);
     }
 
 }
-/*
-Button translate = new Button("Translate");
-Button copyup = new Button("Copy Up");
-Button clear = new Button("Clear");
-VBox vbox = new VBox( 10, CCT, SK, translate, copyup, clear );
-HBox hbox = new HBox( 25, CCT, SK, translate, copyup, clear );
-Label SK = new Label( " Select a key, enter message, press 'Translate'")
-TextField 1 = new TextField();
-TextField 2 = new TextField();
-
- */
